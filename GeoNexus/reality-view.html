@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reality Capture &amp; LiDAR Point Cloud Lab | GeoNexus</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">GeoNexus</span>
+          <span class="brand-subtitle">3D Geospatial Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="map.html" class="nav-link">3D Map</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="ulpin.html" class="nav-link" data-tooltip="ULPIN">3D ULPIN</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="reality-view.html" class="nav-link active" data-tooltip="Gaussian Splatting">Reality View</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+
+      <div class="nav-search-container">
+        <div class="search-input-wrap">
+          <span class="search-icon-nav">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search LiDAR, 3DGS..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <span class="badge badge-lidar">LiDAR LAB</span>
+        <div class="user-profile-badge">
+          <div class="user-avatar">GO</div>
+          <span>Cadastre Officer</span>
+        </div>
+        <button class="hamburger-btn" aria-label="Toggle Menu">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header-bar">
+    <div class="page-header-container">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.35rem;">
+          <h1 class="page-title">Digital Twin vs Reality View Lab</h1>
+          <span class="badge badge-cadastre">Reality Capture</span>
+        </div>
+        <p class="page-subtitle">Synchronized comparison between GIS geometry models, 3D Gaussian Splatting and WebGL LiDAR point clouds.</p>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <a href="map.html" class="btn btn-primary">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          Full 3D Map
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="app-main" style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem 3.5rem;">
+    
+    <!-- Dual Viewport Comparison (Digital Twin vs Reality Capture) -->
+    <div style="margin-bottom: 2.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <div>
+          <h3 style="font-size:1.35rem;">Synchronized Spatial Viewport Comparison</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem;">Rotate either viewport • both cameras stay locked in synchronized orbit</p>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <span class="badge badge-cadastre">CAMERA SYNC ACTIVE</span>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        
+        <!-- Left: 3D Digital Twin (GIS Model) -->
+        <div class="twin-viewport-card" style="height: 440px;">
+          <div class="viewport-header">
+            <div class="viewport-title-group">
+              <span class="viewport-title">3D DIGITAL TWIN (GIS Model)</span>
+              <span class="badge badge-cadastre">CADASTRE</span>
+            </div>
+            <span style="font-size:0.75rem; color:#94a3b8;">Geometric Boundary Units</span>
+          </div>
+          <div class="viewport-canvas-container" id="compareTwinCanvas"></div>
+          <div style="position:absolute; bottom:0.85rem; left:0.85rem; background:rgba(15,23,42,0.8); padding:0.4rem 0.75rem; border-radius:var(--radius-sm); font-size:0.72rem; color:#94a3b8;">
+            GIS Computed Vector Geometry
+          </div>
+        </div>
+
+        <!-- Right: Reality View (3DGS / Photogrammetry) -->
+        <div class="twin-viewport-card" style="height: 440px; border-color: rgba(162, 28, 175, 0.4);">
+          <div class="viewport-header" style="background: rgba(46, 16, 101, 0.85);">
+            <div class="viewport-title-group">
+              <span class="viewport-title">REALITY VIEW (3DGS Capture)</span>
+              <span class="badge badge-cadastre">3DGS Asset</span>
+            </div>
+            <span style="font-size:0.75rem; color:#d8b4fe;">Photogrammetry Mesh</span>
+          </div>
+          <div class="viewport-canvas-container" id="compareRealityCanvas"></div>
+          <div style="position:absolute; bottom:0.85rem; left:0.85rem; background:rgba(46,16,101,0.85); padding:0.4rem 0.75rem; border-radius:var(--radius-sm); font-size:0.72rem; color:#e9d5ff;">
+            3DGS Asset • Point Splat Capture Mode
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WebGL LiDAR Point-Cloud Lab -->
+    <div class="card" style="margin-bottom: 2.5rem;">
+      <div class="card-header">
+        <div>
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+            <h3 class="card-title">WebGL LiDAR Point Cloud Visualizer</h3>
+            <span class="badge badge-lidar">LiDAR Point Cloud</span>
+          </div>
+          <p class="card-subtitle">Altitude color gradient rendering (14,000 points: Navy → Cyan → Green → Amber → Red)</p>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem;">
+            <span>Point Size:</span>
+            <input type="range" id="lidarPointSize" min="0.4" max="2.5" step="0.1" value="0.9" style="width:90px;">
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-dark); border-radius:var(--radius-md); height:420px; position:relative; overflow:hidden;">
+        <div id="lidarLabCanvas" style="width:100%; height:100%;"></div>
+        
+        <div style="position:absolute; bottom:1rem; left:1rem; background:rgba(15,23,42,0.85); border:1px solid rgba(255,255,255,0.15); border-radius:var(--radius-md); padding:0.65rem 1rem; color:white; font-size:0.78rem; display:flex; flex-direction:column; gap:0.35rem;">
+          <div><strong>Dataset:</strong> Visakhapatnam LiDAR (MVP Sector)</div>
+          <div class="mono" style="color:#38bdf8;">Density: 12.4 pts/m² | CRS: EPSG:4326 | Accuracy: ±3.2cm</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simulated LiDAR File Upload Pipeline -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">LiDAR Point Cloud Ingestion Pipeline</h3>
+          <p class="card-subtitle">Supported formats: LAS / LAZ / PLY / XYZ (Octree Ingestion)</p>
+        </div>
+        <span class="badge badge-cadastre">Ingestion Pipeline</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+          <input type="file" accept=".las,.laz,.ply,.xyz" style="font-size:0.85rem; padding:0.5rem; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-secondary);">
+          <button class="btn btn-primary" id="startLidarUploadBtn">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload LiDAR Dataset
+          </button>
+        </div>
+
+        <div id="lidarUploadProgress" style="display:none; background:var(--bg-secondary); border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1rem;">
+          <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:700; margin-bottom:0.45rem;">
+            <span id="lidarProgressLabel">0% • Uploading Point Stream...</span>
+          </div>
+          <div style="width:100%; height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden;">
+            <div id="lidarProgressBar" style="width:0%; height:100%; background:var(--blue-primary); transition:width 0.4s;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <div>© 2026 GeoNexus • Reality View &amp; LiDAR Point Cloud Lab</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map3d.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/reality-view.js"></script>
+</body>
+</html>

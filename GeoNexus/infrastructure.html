@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Underground Infrastructure &amp; Spatial Conflicts | GeoNexus</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .depth-levels-bar {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .depth-level-pill {
+      background: white;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-full);
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .depth-level-pill:hover, .depth-level-pill.active {
+      background: var(--blue-primary);
+      color: white;
+      border-color: var(--blue-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">GeoNexus</span>
+          <span class="brand-subtitle">3D Geospatial Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="map.html" class="nav-link">3D Map</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="ulpin.html" class="nav-link" data-tooltip="ULPIN">3D ULPIN</a>
+        <a href="infrastructure.html" class="nav-link active">Infrastructure</a>
+        <a href="reality-view.html" class="nav-link" data-tooltip="Gaussian Splatting">Reality View</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+
+      <div class="nav-search-container">
+        <div class="search-input-wrap">
+          <span class="search-icon-nav">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search Utility, Conflict..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-button" onclick="GeoNexusApp.showToast('3 Spatial Conflicts require review', 'warning')" title="Notifications">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-badge"></span>
+        </button>
+        <div class="user-profile-badge">
+          <div class="user-avatar">GO</div>
+          <span>Cadastre Officer</span>
+        </div>
+        <button class="hamburger-btn" aria-label="Toggle Menu">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header-bar">
+    <div class="page-header-container">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.35rem;">
+          <h1 class="page-title">Underground GIS &amp; Subsurface Spatial Intelligence</h1>
+          <span class="badge badge-danger">3 SPATIAL CONFLICTS</span>
+        </div>
+        <p class="page-subtitle">Subsurface utility corridor mapping and automated geometric foundation clash detection.</p>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <a href="map.html" class="btn btn-primary">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          Full 3D Map View
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="app-main" style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem 3.5rem;">
+    
+    <!-- Depth Control Bar -->
+    <div class="depth-levels-bar">
+      <span style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">SUBSURFACE DEPTH:</span>
+      <button class="depth-level-pill active" data-depth="0m">Surface (0.0m)</button>
+      <button class="depth-level-pill" data-depth="-5m">Shallow Utilities (-3.8m / -5m)</button>
+      <button class="depth-level-pill" data-depth="-10m">Deep Trunk Sewer (-7.5m / -10m)</button>
+      <button class="depth-level-pill" data-depth="-20m">Metro Blue Line Transit (-18.5m)</button>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      
+      <!-- Subsurface 3D Viewport -->
+      <div class="twin-viewport-card" style="height: 520px;">
+        <div class="viewport-header">
+          <div class="viewport-title-group">
+            <span class="viewport-title">Subsurface 3D Pipe Network &amp; Clash Detection</span>
+            <span class="badge badge-cadastre">Subsurface GIS</span>
+          </div>
+
+          <div class="viewport-controls-bar">
+            <span class="badge badge-danger">CONFLICT #1024 ACTIVE</span>
+          </div>
+        </div>
+
+        <div class="viewport-canvas-container" id="subsurfaceCanvas"></div>
+
+        <div class="viewport-overlay-legend" style="flex-wrap: wrap;">
+          <div class="legend-item"><span class="legend-dot" style="background:#0284c7;"></span> Water W-203</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#a16207;"></span> Sewer S-101</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#eab308;"></span> Power P-405</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#ef4444;"></span> Gas G-88</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Metro Blue Line</div>
+        </div>
+      </div>
+
+      <!-- Spatial Conflicts Center -->
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <h3 style="font-size:1.25rem;">Spatial Conflict Ledger</h3>
+          <select id="conflictFilterSeverity" style="padding:0.4rem 0.75rem; border:1px solid var(--border-light); border-radius:var(--radius-md); background:white; font-size:0.82rem;">
+            <option value="all">All Severities</option>
+            <option value="high">High Severity</option>
+            <option value="medium">Medium Severity</option>
+            <option value="low">Low Severity</option>
+          </select>
+        </div>
+
+        <div id="conflictsListContainer"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <div>© 2026 GeoNexus • Underground Infrastructure GIS</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map3d.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/infrastructure.js"></script>
+</body>
+</html>

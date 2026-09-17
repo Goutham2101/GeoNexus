@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D ULPIN Generation &amp; Spatial Hierarchy | GeoNexus</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .hierarchy-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .hierarchy-node {
+      background: white;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.4rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      min-width: 140px;
+      position: relative;
+    }
+    .hierarchy-code {
+      font-family: var(--font-mono);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--blue-primary);
+      margin-bottom: 0.25rem;
+    }
+    .hierarchy-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+    }
+    .hierarchy-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .hierarchy-arrow {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">GeoNexus</span>
+          <span class="brand-subtitle">3D Geospatial Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="map.html" class="nav-link">3D Map</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="ulpin.html" class="nav-link active" data-tooltip="ULPIN">3D ULPIN</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="reality-view.html" class="nav-link" data-tooltip="Gaussian Splatting">Reality View</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+
+      <div class="nav-search-container">
+        <div class="search-input-wrap">
+          <span class="search-icon-nav">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search ULPIN, Unit..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-button" onclick="GeoNexusApp.showToast('No new alerts', 'info')" title="Notifications">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+        <div class="user-profile-badge">
+          <div class="user-avatar">GO</div>
+          <span>Cadastre Officer</span>
+        </div>
+        <button class="hamburger-btn" aria-label="Toggle Menu">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header-bar">
+    <div class="page-header-container">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.35rem;">
+          <h1 class="page-title">3D ULPIN System &amp; Visual Hierarchy</h1>
+          <span class="badge badge-cadastre">BHU-AADHAR 3D</span>
+        </div>
+        <p class="page-subtitle">Standardized 3D Unique Land Parcel Identification Number scheme for vertical property units.</p>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <a href="map.html" class="btn btn-primary">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          View in 3D Map
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="app-main" style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem 3.5rem;">
+
+    <!-- Visual Breakdown Diagram -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">3D ULPIN Architectural Scheme</h3>
+          <p class="card-subtitle">Hierarchical decomposition of flagship unit <code>IND-AP-VIZ-BLD05-F03-U302</code></p>
+        </div>
+        <span class="badge badge-cadastre">ISO 19152 LADM Standard</span>
+      </div>
+
+      <div class="hierarchy-flow">
+        <div class="hierarchy-node">
+          <div class="hierarchy-code">IND</div>
+          <div class="hierarchy-label">Country</div>
+          <div class="hierarchy-sub">India</div>
+        </div>
+
+        <div class="hierarchy-arrow">→</div>
+
+        <div class="hierarchy-node">
+          <div class="hierarchy-code">AP</div>
+          <div class="hierarchy-label">State</div>
+          <div class="hierarchy-sub">Andhra Pradesh</div>
+        </div>
+
+        <div class="hierarchy-arrow">→</div>
+
+        <div class="hierarchy-node">
+          <div class="hierarchy-code">VIZ</div>
+          <div class="hierarchy-label">District / City</div>
+          <div class="hierarchy-sub">Visakhapatnam</div>
+        </div>
+
+        <div class="hierarchy-arrow">→</div>
+
+        <div class="hierarchy-node">
+          <div class="hierarchy-code" style="color:var(--cyan-accent);">BLD05</div>
+          <div class="hierarchy-label">Building ID</div>
+          <div class="hierarchy-sub">Geo Heights</div>
+        </div>
+
+        <div class="hierarchy-arrow">→</div>
+
+        <div class="hierarchy-node">
+          <div class="hierarchy-code" style="color:var(--purple-accent);">F03</div>
+          <div class="hierarchy-label">Floor Stratum</div>
+          <div class="hierarchy-sub">Floor 3 (+11.1m)</div>
+        </div>
+
+        <div class="hierarchy-arrow">→</div>
+
+        <div class="hierarchy-node" style="border-color:var(--blue-primary); box-shadow:0 0 15px rgba(37,99,235,0.2);">
+          <div class="hierarchy-code" style="color:var(--status-success);">U302</div>
+          <div class="hierarchy-label">Spatial Unit</div>
+          <div class="hierarchy-sub">Flat 302 (3 BHK)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live ULPIN Generator Tool -->
+    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Interactive 3D ULPIN Generator</h3>
+            <p class="card-subtitle">Generate official 3D spatial unit identifiers</p>
+          </div>
+          <span class="badge badge-cadastre">AUTO GENERATE</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.35rem;">TARGET BUILDING</label>
+            <select id="ulpinGenBuilding" style="width:100%; padding:0.6rem 0.85rem; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-secondary);">
+              <option value="BLD05">Geo Heights (BLD05 - MVP Colony)</option>
+              <option value="BLD01">Marina Residency (BLD01 - Beach Road)</option>
+              <option value="BLD02">Marina Twin Tower A (BLD02 - Maharanipeta)</option>
+              <option value="BLD03">Sagar Vista (BLD03 - Siripuram)</option>
+              <option value="BLD04">Tech Park Alpha (BLD04 - Rushikonda)</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.35rem;">FLOOR LEVEL</label>
+              <input type="number" id="ulpinGenFloor" value="3" min="0" max="15" style="width:100%; padding:0.6rem 0.85rem; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-secondary);">
+            </div>
+
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.35rem;">UNIT CODE</label>
+              <input type="text" id="ulpinGenUnit" value="U302" style="width:100%; padding:0.6rem 0.85rem; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-secondary);">
+            </div>
+          </div>
+
+          <div style="background:var(--bg-dark); border:1px solid var(--border-dark); border-radius:var(--radius-md); padding:1rem; margin-top:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.7rem; color:#94a3b8; display:block; text-transform:uppercase;">GENERATED 3D ULPIN</span>
+              <span class="mono" style="font-size:1.15rem; font-weight:800; color:#38bdf8;" id="ulpinGenOutput">IND-AP-VIZ-BLD05-F03-U302</span>
+            </div>
+            <button class="btn btn-primary btn-sm" id="ulpinGenCopyBtn">
+              <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy ULPIN
+            </button>
+          </div>
+
+          <button class="btn btn-secondary" id="ulpinGenValidateBtn">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Validate against 3D Cadastre
+          </button>
+          <div id="ulpinValidationResult" style="display:none; background:var(--bg-secondary); border:1px solid var(--border-light); border-radius:var(--radius-md); padding:0.85rem;"></div>
+        </div>
+      </div>
+
+      <!-- Comparison with 2D Cadastre -->
+      <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">2D Land Parcel vs 3D Property Unit</h3>
+              <p class="card-subtitle">Why vertical 3D spatial cadastre is essential</p>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.88rem;">
+            <div style="background:#fef2f2; border:1px solid #fee2e2; border-radius:var(--radius-md); padding:0.85rem;">
+              <strong style="color:#b91c1c;">Conventional 2D ULPIN:</strong>
+              <div class="mono" style="font-size:0.8rem; color:#7f1d1d; margin-top:2px;">IND-AP-VIZ-P55-2C</div>
+              <p style="font-size:0.8rem; color:#991b1b; margin-top:0.25rem;">Represents only the ground surface parcel (1850 sq.mt). Cannot distinguish between 20 separate families living on 5 vertical floors.</p>
+            </div>
+
+            <div style="background:#f0fdf4; border:1px solid #dcfce7; border-radius:var(--radius-md); padding:0.85rem;">
+              <strong style="color:#15803d;">GeoNexus 3D ULPIN:</strong>
+              <div class="mono" style="font-size:0.8rem; color:#14532d; margin-top:2px;">IND-AP-VIZ-BLD05-F03-U302</div>
+              <p style="font-size:0.8rem; color:#166534; margin-top:0.25rem;">Provides unique volumetric legal property identity to Flat 302 on Floor 3 with exact relative elevation (+11.1m AGL) and individual rights.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="map.html?ulpin=IND-AP-VIZ-BLD05-F03-U302" class="btn btn-primary" style="margin-top:1rem; display:inline-flex; align-items:center; justify-content:center; gap:0.4rem;">
+          Launch Interactive 3D View
+          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Searchable Registry Table -->
+    <div class="card" style="padding:0; overflow-x:auto;">
+      <div style="padding:1.25rem 1.5rem; border-bottom:1px solid var(--border-light); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h3 class="card-title">Registered 3D ULPIN Cadastral Units</h3>
+          <p class="card-subtitle">Official spatial registry index for Visakhapatnam region</p>
+        </div>
+        <input type="text" id="ulpinTableSearch" placeholder="Filter ULPIN records..." style="padding:0.45rem 0.85rem; border:1px solid var(--border-light); border-radius:var(--radius-md); font-size:0.85rem; width:240px;">
+      </div>
+
+      <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.88rem;">
+        <thead style="background:var(--bg-secondary); border-bottom:1px solid var(--border-light);">
+          <tr>
+            <th style="padding:0.85rem 1rem;">3D ULPIN (Bhu-Aadhar)</th>
+            <th style="padding:0.85rem 1rem;">Unit</th>
+            <th style="padding:0.85rem 1rem;">Building</th>
+            <th style="padding:0.85rem 1rem;">Floor</th>
+            <th style="padding:0.85rem 1rem;">Status</th>
+            <th style="padding:0.85rem 1rem;">Spatial Status</th>
+            <th style="padding:0.85rem 1rem;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="ulpinRegistryTableBody"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <div>© 2026 GeoNexus • 3D ULPIN Generation System</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/ulpin.js"></script>
+</body>
+</html>

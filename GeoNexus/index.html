@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoNexus | 3D Intelligence for Land, Property &amp; Infrastructure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">GeoNexus</span>
+          <span class="brand-subtitle">3D Geospatial Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link active">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="map.html" class="nav-link">3D Map</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="ulpin.html" class="nav-link" data-tooltip="ULPIN">3D ULPIN</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="reality-view.html" class="nav-link" data-tooltip="Gaussian Splatting">Reality View</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+
+      <div class="nav-search-container">
+        <div class="search-input-wrap">
+          <span class="search-icon-nav">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search ULPIN, Unit, Building..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-button" onclick="GeoNexusApp.showToast('No new spatial alerts', 'info')" title="Notifications">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-badge"></span>
+        </button>
+        <div class="user-profile-badge" onclick="GeoNexusApp.showToast('Logged in as Geospatial Cadastral Officer', 'info')">
+          <div class="user-avatar">GO</div>
+          <span>Cadastre Officer</span>
+        </div>
+        <button class="hamburger-btn" aria-label="Toggle Menu">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="app-main">
+    <section style="background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 1px solid var(--border-light); padding: 4rem 0 3rem; overflow: hidden; position: relative;">
+      <div style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center;">
+        
+        <div>
+          <div style="display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1.25rem;">
+            <span class="badge badge-cadastre">3D Cadastral Intelligence System</span>
+          </div>
+
+          <h1 style="font-size: 2.85rem; letter-spacing: -0.03em; margin-bottom: 1.25rem; line-height: 1.15;">
+            3D Intelligence for <span style="background: linear-gradient(135deg, #1e3a8a, #2563eb, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Land, Property &amp; Infrastructure</span>
+          </h1>
+
+          <p style="font-size: 1.12rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; max-width: 540px;">
+            Transforming conventional 2D land records into intelligent, vertical 3D spatial property units with unit-level 3D ULPIN identity, subsurface utility mapping, and Reality Capture digital twins.
+          </p>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+            <a href="map.html" class="btn btn-primary btn-lg">
+              <svg class="icon icon-md icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+              Explore 3D Map
+            </a>
+            <a href="#workflow-overview" class="btn btn-secondary btn-lg">
+              <svg class="icon icon-md icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              View Workflow
+            </a>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; border-top: 1px solid var(--border-light); padding-top: 1.5rem;">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">REGION</div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Visakhapatnam</div>
+              <div style="font-size: 0.72rem; color: var(--cyan-accent); font-family: var(--font-mono);">IND-AP-VIZ</div>
+            </div>
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">MAPPED UNITS</div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">4,832 Units</div>
+              <div style="font-size: 0.72rem; color: var(--status-success);">186 3D Buildings</div>
+            </div>
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">ACCURACY</div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">LiDAR Ready</div>
+              <div style="font-size: 0.72rem; color: var(--purple-accent);">EPSG:4326 Datum</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Hero Canvas -->
+        <div style="background: var(--bg-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-xl); height: 460px; box-shadow: var(--shadow-xl); overflow: hidden; position: relative;">
+          <div id="hero3DCanvas" style="width: 100%; height: 100%;"></div>
+          <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 0.4rem 0.75rem; font-size: 0.75rem; color: white; display: flex; align-items: center; gap: 0.4rem;">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+            <span>Interactive 3D View • Click Building to Inspect</span>
+          </div>
+          <div style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 0.5rem 0.85rem; color: #e2e8f0; font-size: 0.75rem;">
+            <span>Flagship: <strong>Geo Heights (BLD05)</strong></span>
+            <a href="map.html?ulpin=IND-AP-VIZ-BLD05-F03-U302" style="color: #38bdf8; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+              Open Flat 302
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6 Feature Cards Section -->
+    <section style="padding: 4rem 0; max-width: var(--max-width); margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <span class="badge badge-cadastre" style="margin-bottom: 0.5rem;">Core Spatial Pillars</span>
+        <h2 style="font-size: 2.2rem; margin-top: 0.5rem;">Intelligent Geospatial Capabilities</h2>
+        <p style="color: var(--text-muted); font-size: 1rem; max-width: 600px; margin: 0.5rem auto 0;">
+          A unified government-grade framework bridging 2D cadastre, 3D vertical architecture, and subterranean utility easements.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        <!-- Card 1 -->
+        <div class="card feature-card">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--blue-light); color: var(--blue-primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">3D ULPIN</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Unit-level spatial identity extending conventional Bhu-Aadhar into stratified vertical units (Country → State → District → Building → Floor → Flat).
+          </p>
+          <a href="ulpin.html" style="font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+            Explore ULPIN Decoder
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card feature-card">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #f0fdf4; color: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Digital Twin</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Interactive multi-floor building visualization with real-time floor separation and vertical stratum analysis.
+          </p>
+          <a href="map.html" style="font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+            Launch 3D Twin
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card feature-card">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--cyan-light); color: var(--cyan-accent); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">LiDAR Ready</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Architecture prepared for point-cloud datasets (LAS/LAZ) with altitude color gradient rendering and spatial indexing.
+          </p>
+          <a href="reality-view.html" style="font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+            View Point Cloud Lab
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card feature-card">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #fae8ff; color: #a21caf; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Reality View</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Dual synchronized viewports comparing GIS digital geometry models directly with photogrammetry and 3D Gaussian Splatting captures.
+          </p>
+          <a href="reality-view.html" style="font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+            Compare Reality View
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card feature-card">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #fef2f2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><path d="M5 8v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/><path d="M12 13v3"/></svg>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Underground GIS</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Subsurface utility mapping (water, gas, electricity, sewer, metro) with automatic spatial conflict and clearance detection.
+          </p>
+          <a href="infrastructure.html" style="font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+            Inspect Subsurface GIS
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card feature-card">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+            <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Property Intelligence</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Unit availability discovery, valuation metrics, spatial verification status, and privacy-conscious owner contact protocol.
+          </p>
+          <a href="properties.html" style="font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+            Browse Properties
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Workflow Section -->
+    <section id="workflow-overview" style="background: var(--navy-900); color: white; padding: 4.5rem 0; border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark);">
+      <div style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;">
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+          <span class="badge badge-cadastre" style="margin-bottom: 0.5rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">Product Workflow</span>
+          <h2 style="font-size: 2.2rem; color: white; margin-top: 0.5rem;">Explore the Spatial Journey</h2>
+          <p style="color: #94a3b8; font-size: 1rem; max-width: 650px; margin: 0.5rem auto 0;">
+            Follow the continuous geospatial continuum from terrestrial cadastral survey parcels down to individual apartment units and reality view capture.
+          </p>
+        </div>
+
+        <!-- 9-Step Clickable Progression Bar -->
+        <div style="display: grid; grid-template-columns: repeat(9, 1fr); gap: 0.5rem; margin-bottom: 3rem; overflow-x: auto; padding-bottom: 0.5rem;">
+          
+          <a href="map.html?layer=parcels" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white; transition: all var(--transition-fast);">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">01</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">PARCEL</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">Survey 55/2C</div>
+          </a>
+
+          <a href="map.html?building=BLD05" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white; transition: all var(--transition-fast);">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">02</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">BUILDING</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">Geo Heights</div>
+          </a>
+
+          <a href="map.html?building=BLD05&amp;floor=3" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white; transition: all var(--transition-fast);">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">03</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">FLOOR</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">Floor 3 (+11m)</div>
+          </a>
+
+          <a href="map.html?ulpin=IND-AP-VIZ-BLD05-F03-U302" style="background: rgba(37, 99, 235, 0.25); border: 1px solid #3b82f6; border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white; box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #60a5fa; font-weight: 700;">04</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">FLAT</div>
+            <div style="font-size: 0.65rem; color: #93c5fd;">Flat 302</div>
+          </a>
+
+          <a href="ulpin.html?ulpin=IND-AP-VIZ-BLD05-F03-U302" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white;">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">05</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">3D ULPIN</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">Bhu-Aadhar 3D</div>
+          </a>
+
+          <a href="properties.html?search=302" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white;">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">06</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">PROPERTY</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">1250 sq.ft</div>
+          </a>
+
+          <a href="reality-view.html" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white;">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">07</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">REALITY</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">3DGS / LiDAR</div>
+          </a>
+
+          <a href="properties.html?status=available_sale" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; text-decoration: none; color: white;">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">08</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">STATUS</div>
+            <div style="font-size: 0.65rem; color: #10b981;">For Sale</div>
+          </a>
+
+          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem 0.6rem; text-align: center; cursor: pointer;" onclick="GeoNexusApp.openContactOwnerModal('IND-AP-VIZ-BLD05-F03-U302')">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; font-weight: 700;">09</div>
+            <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.25rem;">CONTACT</div>
+            <div style="font-size: 0.65rem; color: #94a3b8;">Masked Owner</div>
+          </div>
+
+        </div>
+
+        <!-- Featured Showcase Box -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-xl); padding: 2rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center;">
+          <div>
+            <span class="badge badge-success" style="margin-bottom: 0.75rem;">FLAGSHIP PROPERTY UNIT</span>
+            <h3 style="font-size: 1.7rem; color: white; margin-bottom: 0.5rem;">Flat 302, Geo Heights</h3>
+            <div class="ulpin-tag-box" style="margin-bottom: 1rem;">
+              <span>IND-AP-VIZ-BLD05-F03-U302</span>
+              <button class="copy-btn" onclick="GeoNexusApp.copyText('IND-AP-VIZ-BLD05-F03-U302', 'Flagship ULPIN')" title="Copy ULPIN">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.5;">
+              3 BHK apartment unit located on Floor 3 of Geo Heights, Sector 4 MVP Colony, Visakhapatnam. Verified 3D spatial boundary with sub-meter vertical stratum indexing.
+            </p>
+            <div style="display: flex; gap: 0.75rem;">
+              <a href="map.html?ulpin=IND-AP-VIZ-BLD05-F03-U302" class="btn btn-primary">Launch in 3D Map</a>
+              <button class="btn btn-secondary" onclick="GeoNexusApp.openContactOwnerModal('IND-AP-VIZ-BLD05-F03-U302')">Contact Owner</button>
+            </div>
+          </div>
+
+          <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+              <span style="color: #94a3b8; font-size: 0.85rem;">Valuation:</span>
+              <span style="font-weight: 800; font-size: 1.2rem; color: #38bdf8;">₹72,00,000</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+              <span style="color: #94a3b8; font-size: 0.85rem;">Configuration:</span>
+              <span style="font-weight: 700;">3 BHK • 1250 sq.ft</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+              <span style="color: #94a3b8; font-size: 0.85rem;">Vertical Elevation:</span>
+              <span class="mono" style="color: #38bdf8;">+11.1m AGL</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #94a3b8; font-size: 0.85rem;">Registered Owner:</span>
+              <span>Rajesh Kumar (Masked)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div class="brand-icon">
+            <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.2rem; color: white;">GeoNexus</div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">3D Intelligence for Land, Property &amp; Infrastructure</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; font-size: 0.88rem;">
+          <a href="dashboard.html" style="color: #cbd5e1;">Dashboard</a>
+          <a href="map.html" style="color: #cbd5e1;">3D Map</a>
+          <a href="properties.html" style="color: #cbd5e1;">Properties</a>
+          <a href="ulpin.html" style="color: #cbd5e1;">3D ULPIN</a>
+          <a href="infrastructure.html" style="color: #cbd5e1;">Infrastructure</a>
+          <a href="reality-view.html" style="color: #cbd5e1;">Reality View</a>
+          <a href="analytics.html" style="color: #cbd5e1;">Analytics</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 GeoNexus • 3D Geospatial Intelligence Platform</div>
+        <div style="display: flex; gap: 0.6rem;">
+          <span class="badge badge-cadastre">Visakhapatnam Cadastre</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map3d.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Initialize Hero 3D Preview
+    document.addEventListener("DOMContentLoaded", () => {
+      if (document.getElementById("hero3DCanvas")) {
+        new GeoNexus3DEngine("hero3DCanvas", {
+          mode: "mini",
+          selectedBuildingId: "BLD05",
+          onSelectBuilding: (b) => {
+            window.location.href = `map.html?building=${b.id}`;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

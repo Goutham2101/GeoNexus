@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastral Administration Portal | GeoNexus</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+    .form-control {
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: var(--blue-primary);
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">GeoNexus</span>
+          <span class="brand-subtitle">3D Geospatial Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="map.html" class="nav-link">3D Map</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="ulpin.html" class="nav-link" data-tooltip="ULPIN">3D ULPIN</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="reality-view.html" class="nav-link" data-tooltip="Gaussian Splatting">Reality View</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="admin.html" class="nav-link active">Admin</a>
+      </nav>
+
+      <div class="nav-search-container">
+        <div class="search-input-wrap">
+          <span class="search-icon-nav">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search admin tasks..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <span class="badge badge-cadastre">ADMIN MODE</span>
+        <div class="user-profile-badge">
+          <div class="user-avatar">GO</div>
+          <span>Super Admin</span>
+        </div>
+        <button class="hamburger-btn" aria-label="Toggle Menu">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header-bar">
+    <div class="page-header-container">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.35rem;">
+          <h1 class="page-title">Cadastral Administration &amp; Spatial Governance</h1>
+          <span class="badge badge-cadastre">Spatial Governance</span>
+        </div>
+        <p class="page-subtitle">Add 3D buildings, issue stratified 3D ULPINs, upload GIS layers, and manage property validations.</p>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <a href="map.html" class="btn btn-primary">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          Launch 3D Map
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="app-main" style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem 3.5rem;">
+    
+    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      
+      <!-- Form 1: Add Property Unit & Auto-ULPIN -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Register Vertical Property Unit</h3>
+            <p class="card-subtitle">Generate official 3D ULPIN and register spatial boundaries</p>
+          </div>
+          <span class="badge badge-success">3D CADASTRE</span>
+        </div>
+
+        <form id="adminAddUnitForm">
+          <div class="form-group">
+            <label class="form-label">Building</label>
+            <select class="form-control" id="adminUnitBuilding" required>
+              <option value="BLD05">Geo Heights (BLD05)</option>
+              <option value="BLD01">Marina Residency (BLD01)</option>
+              <option value="BLD02">Marina Twin Tower A (BLD02)</option>
+              <option value="BLD03">Sagar Vista (BLD03)</option>
+              <option value="BLD04">Tech Park Alpha (BLD04)</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Floor Stratum Level</label>
+              <input type="number" class="form-control" id="adminUnitFloor" value="3" min="0" max="25" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Unit Number / Code</label>
+              <input type="text" class="form-control" id="adminUnitNumber" value="U305" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Calculated 3D ULPIN (Bhu-Aadhar)</label>
+            <input type="text" class="form-control mono" id="adminUlpinPreview" readonly style="color:var(--cyan-accent); font-weight:700; background:#f1f5f9;">
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Area (sq.ft)</label>
+              <input type="number" class="form-control" id="adminUnitArea" value="1200" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Valuation Price (₹)</label>
+              <input type="text" class="form-control" id="adminUnitPrice" value="₹68,00,000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Availability Status</label>
+            <select class="form-control" id="adminUnitStatus">
+              <option value="available_sale">Available for Sale</option>
+              <option value="available_rent">Available for Rent</option>
+              <option value="occupied">Occupied</option>
+              <option value="under_construction">Under Construction</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Issue 3D ULPIN &amp; Save Unit
+          </button>
+        </form>
+      </div>
+
+      <!-- Form 2: Register New Building -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Register 3D Building Digital Twin</h3>
+            <p class="card-subtitle">Connect building footprint with municipal cadastral parcel</p>
+          </div>
+          <span class="badge badge-cadastre">BUILDING TWIN</span>
+        </div>
+
+        <form id="adminAddBuildingForm">
+          <div class="form-group">
+            <label class="form-label">Building Name</label>
+            <input type="text" class="form-control" id="adminBldName" value="Harbour Vista Tower" required>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Building ID</label>
+              <input type="text" class="form-control mono" id="adminBldId" value="BLD06" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Survey Number</label>
+              <input type="text" class="form-control" id="adminBldSurvey" value="77/4B" required>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Height (Meters)</label>
+              <input type="number" class="form-control" id="adminBldHeight" value="28.5" step="0.5" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Floors Count</label>
+              <input type="number" class="form-control" id="adminBldFloors" value="8" min="1" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Footprint Area (sq.mt)</label>
+            <input type="number" class="form-control" id="adminBldArea" value="950" required>
+          </div>
+
+          <button type="submit" class="btn btn-secondary" style="width:100%;">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Register 3D Building Twin
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Additional Cadastral Tasks -->
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+      
+      <!-- Task 1: Upload GIS Data -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Upload Cadastral Boundary Layer</h3>
+            <p class="card-subtitle">Supported: GeoJSON, ESRI Shapefile, CityGML</p>
+          </div>
+          <span class="badge badge-cadastre">GIS Ingestion</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <input type="file" accept=".json,.geojson,.zip,.gml" class="form-control" id="gisFileInput">
+          <button class="btn btn-primary btn-sm" id="adminUploadGisBtn">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload &amp; Validate Cadastre
+          </button>
+        </div>
+      </div>
+
+      <!-- Task 2: Register 3DGS Asset -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Register 3DGS Reality Capture Asset</h3>
+            <p class="card-subtitle">Link drone photogrammetry &amp; Gaussian Splatting files</p>
+          </div>
+          <span class="badge badge-cadastre">3DGS ASSET</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <input type="file" accept=".splat,.ply" class="form-control" id="splatFileInput">
+          <button class="btn btn-secondary btn-sm" id="adminRegister3DGSBtn">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Register 3DGS Point Stream
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <div>© 2026 GeoNexus • Cadastral Governance Portal</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

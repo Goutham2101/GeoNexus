@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D GIS Map &amp; Digital Twin Workstation | GeoNexus</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body style="overflow: hidden;">
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">GeoNexus</span>
+          <span class="brand-subtitle">3D Geospatial Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+          <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="map.html" class="nav-link active">3D Map</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="ulpin.html" class="nav-link" data-tooltip="ULPIN">3D ULPIN</a>
+        <a href="infrastructure.html" class="nav-link">Infrastructure</a>
+        <a href="reality-view.html" class="nav-link" data-tooltip="Gaussian Splatting">Reality View</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+
+      <div class="nav-search-container">
+        <div class="search-input-wrap">
+          <span class="search-icon-nav">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search ULPIN, Flat 302..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <span class="badge badge-cadastre" style="background: rgba(15, 23, 42, 0.8); color: #94a3b8; border: 1px solid rgba(255,255,255,0.15);">GIS WORKSTATION</span>
+        <div class="user-profile-badge" onclick="GeoNexusApp.showToast('Cadastral Station Active', 'info')">
+          <div class="user-avatar">GO</div>
+        </div>
+        <button class="hamburger-btn" aria-label="Toggle Menu">
+          <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3D GIS Workstation Viewport -->
+  <main class="map-workstation">
+    
+    <!-- 3D Three.js Canvas -->
+    <div class="map-canvas-container" id="mapWorkstationCanvas"></div>
+
+    <!-- GIS Floating Mode Toolbar Top -->
+    <div class="gis-top-toolbar">
+      <button class="gis-mode-pill active" data-mode="surface">
+        <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        Surface View
+      </button>
+      <button class="gis-mode-pill" data-mode="vertical">
+        <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 17 22 12"/></svg>
+        Vertical Stratum
+      </button>
+      <button class="gis-mode-pill" data-mode="underground">
+        <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><path d="M5 8v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/><path d="M12 13v3"/></svg>
+        Underground (-25m)
+      </button>
+      <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.2); margin: 0 0.2rem;"></div>
+      <button class="gis-mode-pill" onclick="map3DEngine.flyCameraTo(new THREE.Vector3(55, 45, 65), new THREE.Vector3(0, 10, 0)); GeoNexusApp.showToast('Camera View Reset', 'info');">
+        <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Reset Camera
+      </button>
+    </div>
+
+    <!-- Left Panel: Layer Manager Drawer -->
+    <div class="map-drawer-left" id="mapLayerDrawer">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 17 22 12"/></svg>
+          <span>GIS Layer Control</span>
+        </div>
+        <span class="badge badge-cadastre">12 LAYERS</span>
+      </div>
+
+      <div class="drawer-content-scroll">
+        <!-- Cadastral & Building Layers -->
+        <div>
+          <div class="layer-section-title">Cadastre &amp; Digital Twin</div>
+          <div class="layer-list">
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Land Parcels</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerParcels" data-layer-name="Land Parcels" checked>
+            </label>
+
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8"/><path d="M18 9h2a2 2 0 0 1 2 2v11"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+                <span>3D Buildings</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerBuildings" data-layer-name="3D Buildings" checked>
+            </label>
+
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/><path d="M12 3v18"/></svg>
+                <span>Roads &amp; Grid</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerRoads" data-layer-name="Roads" checked>
+            </label>
+
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 17 22 12"/></svg>
+                <span>ULPIN Boundaries</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerUlpin" data-layer-name="ULPIN Boundaries" checked>
+            </label>
+          </div>
+        </div>
+
+        <!-- Subsurface Infrastructure Layers -->
+        <div>
+          <div class="layer-section-title">Subsurface &amp; Utilities</div>
+          <div class="layer-list">
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" style="color:#0284c7;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M12 4v16"/><circle cx="12" cy="12" r="4"/></svg>
+                <span>Water Pipelines</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerUnderground" data-layer-name="Underground Utilities" checked>
+            </label>
+
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" style="color:#ef4444;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Spatial Conflicts</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerConflicts" data-layer-name="Spatial Conflicts" checked>
+            </label>
+          </div>
+        </div>
+
+        <!-- Remote Sensing Layers -->
+        <div>
+          <div class="layer-section-title">Remote Sensing &amp; Reality</div>
+          <div class="layer-list">
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" style="color:#38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="4" r="1.5"/><circle cx="12" cy="4" r="1.5"/><circle cx="20" cy="4" r="1.5"/><circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/><circle cx="4" cy="16" r="1.5"/><circle cx="12" cy="16" r="1.5"/><circle cx="20" cy="16" r="1.5"/><circle cx="8" cy="21" r="1.5"/><circle cx="16" cy="21" r="1.5"/></svg>
+                <span>LiDAR Point Cloud</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layerLidar" data-layer-name="LiDAR Point Cloud">
+            </label>
+
+            <label class="layer-toggle-row">
+              <span class="layer-label-group">
+                <svg class="icon icon-sm" style="color:#d97706;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="8" ry="4"/><ellipse cx="12" cy="12" rx="4" ry="8"/></svg>
+                <span>3DGS Gaussian Splats</span>
+              </span>
+              <input type="checkbox" class="layer-checkbox" id="layer3dgs" data-layer-name="3DGS" onchange="GeoNexusApp.showToast(this.checked ? '3DGS Layer visualization active' : '3DGS Layer Hidden', 'info')">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Property & Spatial Inspector Drawer -->
+    <div class="map-drawer-right" id="mapPropertyInspector">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
+          <span>Spatial Unit Inspector</span>
+        </div>
+        <button class="modal-close-btn" style="color:white;" onclick="document.getElementById('mapPropertyInspector').classList.add('collapsed')">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="inspector-body">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.25rem;">
+            <div class="inspector-header-unit" id="inspUnitTitle">Flat 302</div>
+            <span class="badge badge-available_sale" id="inspStatusBadge">AVAILABLE FOR SALE</span>
+          </div>
+          <div class="inspector-header-bld" id="inspBuildingName">Geo Heights (BLD05)</div>
+        </div>
+
+        <!-- 3D ULPIN Code Tag -->
+        <div>
+          <div style="font-size:0.7rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:0.25rem;">3D ULPIN (Bhu-Aadhar Spatial Identifier)</div>
+          <div class="ulpin-tag-box" style="width:100%; justify-content:space-between;">
+            <span id="inspUlpinVal">IND-AP-VIZ-BLD05-F03-U302</span>
+            <button class="copy-btn" onclick="GeoNexusApp.copyText(document.getElementById('inspUlpinVal').textContent, '3D ULPIN')" title="Copy ULPIN">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Spatial Coordinates Pill -->
+        <div class="spatial-coord-pill" id="inspCoords">
+          17.686824, 83.218541 | Elev: 11.1m AGL
+        </div>
+
+        <!-- Specs Grid -->
+        <div class="inspector-grid">
+          <div><span style="font-size:0.68rem; color:#94a3b8; display:block;">SUPER AREA</span><strong id="inspArea">1250 sq.ft</strong></div>
+          <div><span style="font-size:0.68rem; color:#94a3b8; display:block;">CONFIGURATION</span><strong id="inspConfig">3 BHK</strong></div>
+          <div><span style="font-size:0.68rem; color:#94a3b8; display:block;">FLOOR STRATUM</span><strong id="inspFloor">3rd Floor</strong></div>
+          <div><span style="font-size:0.68rem; color:#94a3b8; display:block;">PARKING SLOT</span><strong id="inspParking">Available (B-14)</strong></div>
+        </div>
+
+        <!-- Valuation Price -->
+        <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-md); padding:0.85rem; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span style="font-size:0.68rem; color:#94a3b8; display:block;">VALUATION PRICE</span>
+            <span style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:#38bdf8;" id="inspPrice">₹72,00,000</span>
+          </div>
+          <span class="badge badge-cadastre">Verified Valuation</span>
+        </div>
+
+        <!-- Action Stack -->
+        <div class="inspector-actions-stack">
+          <button class="btn btn-primary" id="inspContactBtn" data-contact-owner="IND-AP-VIZ-BLD05-F03-U302">Contact Owner</button>
+          <button class="btn btn-secondary" id="inspRealityBtn">
+            Reality View
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <button class="btn btn-dark btn-sm" onclick="GeoNexusApp.showToast('Foundation clearance verified: 1.8m clearance from W-203', 'warning')">
+            <svg class="icon icon-sm icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Check Spatial Conflicts
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Controls: Multi-Floor Explosion & Building Switcher -->
+    <div class="map-bottom-controls">
+      
+      <!-- Building Switcher -->
+      <div class="building-select-bar">
+        <span style="font-size:0.75rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">BUILDING:</span>
+        <select id="buildingSelectorSelect" style="background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:var(--radius-sm); padding:0.25rem 0.5rem; font-size:0.8rem; font-weight:600; outline:none; cursor:pointer;">
+          <option value="BLD05" style="background:#0f172a; color:white;">Geo Heights (BLD05 - Flagship)</option>
+          <option value="BLD01" style="background:#0f172a; color:white;">Marina Residency (BLD01)</option>
+          <option value="BLD02" style="background:#0f172a; color:white;">Marina Twin Tower A (BLD02)</option>
+          <option value="BLD03" style="background:#0f172a; color:white;">Sagar Vista (BLD03)</option>
+          <option value="BLD04" style="background:#0f172a; color:white;">Tech Park Alpha (BLD04)</option>
+        </select>
+      </div>
+
+      <div style="width:1px; height:20px; background:rgba(255,255,255,0.15);"></div>
+
+      <!-- Floor Explosion Controls -->
+      <div class="explosion-slider-group">
+        <button class="btn btn-secondary btn-sm" id="mapExplodeBtn">Explode Floors</button>
+        <input type="range" min="0" max="100" value="0" class="explosion-slider" id="explosionSlider" title="Vertical Floor Separation Level">
+        <button class="btn btn-dark btn-sm" id="mapResetBtn" title="Reset to base">Reset</button>
+      </div>
+
+      <div style="width:1px; height:20px; background:rgba(255,255,255,0.15);"></div>
+
+      <!-- Floor Buttons -->
+      <div style="display:flex; align-items:center; gap:0.4rem;">
+        <span style="font-size:0.75rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">FLOOR:</span>
+        <div class="floor-buttons-row" id="floorButtonsContainer"></div>
+      </div>
+
+    </div>
+
+    <!-- Floating Status Pill -->
+    <div class="map-status-pill">
+      <span>EPSG:4326 Datum</span>
+      <span>•</span>
+      <span>Visakhapatnam MVP Sector</span>
+      <span>•</span>
+      <span style="color:#38bdf8;">Three.js WebGL Engine Active</span>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map3d.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/map.js"></script>
+</body>
+</html>
